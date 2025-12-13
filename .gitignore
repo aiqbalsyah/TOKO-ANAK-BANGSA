@@ -14,14 +14,15 @@ build/
 dist/
 
 # Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Ignore ALL .env files except .env.example
+.env*
+!.env.example
 
-# Keep .env.staging and .env.production in git (they will be used in CI/CD)
-# But protect them using GitHub Secrets for sensitive values
+# IMPORTANT: Never commit real environment files with secrets
+# Use .env.example as a template and set actual values in:
+# - .env.local (development)
+# - GitHub Secrets (CI/CD)
+# - Firebase App Hosting Environment Variables (production)
 
 # Python
 __pycache__/
@@ -35,7 +36,9 @@ env/
 .venv
 
 # IDEs
-.vscode/
+# .vscode/ - Keep VSCode workspace settings (shared with team)
+# But ignore personal settings if needed:
+# .vscode/settings.local.json
 .idea/
 *.swp
 *.swo

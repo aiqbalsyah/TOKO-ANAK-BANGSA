@@ -1,0 +1,87 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // Next.js Apps - Client-side Debugging
+    {
+      "name": "Store Portal (Client)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/apps/store-portal",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Marketplace (Client)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3001",
+      "webRoot": "${workspaceFolder}/apps/marketplace"
+    },
+    {
+      "name": "Company Profile (Client)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3002",
+      "webRoot": "${workspaceFolder}/apps/company-profile"
+    },
+    {
+      "name": "Platform Admin (Client)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3003",
+      "webRoot": "${workspaceFolder}/apps/platform-admin"
+    },
+
+    // Next.js Apps - Server-side Debugging
+    {
+      "name": "Store Portal (Server)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/apps/store-portal",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_OPTIONS": "--inspect"
+      }
+    },
+
+    // Flask API Debugging
+    {
+      "name": "Flask API",
+      "type": "python",
+      "request": "launch",
+      "module": "flask",
+      "env": {
+        "FLASK_APP": "main.py",
+        "FLASK_ENV": "development",
+        "FLASK_DEBUG": "1"
+      },
+      "args": ["run", "--host=0.0.0.0", "--port=8080"],
+      "cwd": "${workspaceFolder}/apps/api",
+      "jinja": true,
+      "justMyCode": true
+    },
+
+    // Attach to Running Process
+    {
+      "name": "Attach to Node Process",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack (Store Portal + API)",
+      "configurations": ["Store Portal (Client)", "Flask API"],
+      "presentation": {
+        "hidden": false,
+        "group": "fullstack"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "recommendations": [
+    // TypeScript/JavaScript
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+
+    // React/Next.js
+    "dsznajder.es7-react-js-snippets",
+    "burkeholland.simple-react-snippets",
+
+    // Tailwind CSS
+    "bradlc.vscode-tailwindcss",
+
+    // Python
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+
+    // i18n
+    "lokalise.i18n-ally",
+
+    // Firebase
+    "toba.vsfire",
+
+    // Monorepo
+    "arcanis.vscode-zipfs",
+
+    // Git
+    "eamodio.gitlens",
+    "github.vscode-pull-request-github",
+
+    // Markdown
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+
+    // Utilities
+    "christian-kohler.path-intellisense",
+    "visualstudioexptteam.vscodeintellicode",
+    "usernamehw.errorlens",
+    "gruntfuggly.todo-tree",
+    "wayou.vscode-todo-highlight",
+
+    // GitHub Copilot
+    "github.copilot",
+    "github.copilot-chat"
+  ],
+  "unwantedRecommendations": [
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}

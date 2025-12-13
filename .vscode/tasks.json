@@ -1,0 +1,175 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // Development Tasks
+    {
+      "label": "Dev: All Apps",
+      "type": "shell",
+      "command": "pnpm dev",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Dev: Store Portal",
+      "type": "shell",
+      "command": "pnpm dev:store-portal",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Dev: Marketplace",
+      "type": "shell",
+      "command": "pnpm dev:marketplace",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Dev: Flask API",
+      "type": "shell",
+      "command": "pnpm dev:api",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+
+    // Build Tasks
+    {
+      "label": "Build: All",
+      "type": "shell",
+      "command": "pnpm build",
+      "problemMatcher": ["$tsc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build: Store Portal",
+      "type": "shell",
+      "command": "pnpm build:store-portal",
+      "problemMatcher": ["$tsc"]
+    },
+
+    // Type Checking
+    {
+      "label": "TypeCheck: All",
+      "type": "shell",
+      "command": "pnpm typecheck",
+      "problemMatcher": ["$tsc"],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    },
+
+    // Linting
+    {
+      "label": "Lint: All",
+      "type": "shell",
+      "command": "pnpm lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "group": {
+        "kind": "test",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Lint: Fix All",
+      "type": "shell",
+      "command": "pnpm lint --fix",
+      "problemMatcher": ["$eslint-stylish"]
+    },
+
+    // Clean Tasks
+    {
+      "label": "Clean: All",
+      "type": "shell",
+      "command": "pnpm clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean: Node Modules",
+      "type": "shell",
+      "command": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+      "problemMatcher": []
+    },
+
+    // Firebase Tasks
+    {
+      "label": "Firebase: Emulators",
+      "type": "shell",
+      "command": "pnpm firebase:emulators",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+
+    // Sprint Tasks
+    {
+      "label": "Sprint: Create Story",
+      "type": "shell",
+      "command": "pnpm story:create",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+
+    // Python Tasks
+    {
+      "label": "Python: Install Requirements",
+      "type": "shell",
+      "command": "pip install -r requirements.txt",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/api"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Format (Black)",
+      "type": "shell",
+      "command": "black .",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/api"
+      },
+      "problemMatcher": []
+    },
+
+    // Git Tasks
+    {
+      "label": "Git: Pull All Branches",
+      "type": "shell",
+      "command": "git pull",
+      "problemMatcher": []
+    },
+    {
+      "label": "Git: Check Status",
+      "type": "shell",
+      "command": "git status",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Flask
+instance/
+.webassets-cache
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Firebase Service Account (NEVER COMMIT THIS!)
+serviceAccountKey.json
+*-firebase-adminsdk-*.json
+
+# Logs
+*.log
+flask-debug.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

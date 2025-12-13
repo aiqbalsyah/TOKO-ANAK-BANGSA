@@ -1,0 +1,260 @@
+{
+  // Next.js Component Snippets
+  "Next.js Server Page Component": {
+    "prefix": "nxpage",
+    "body": [
+      "import { getTranslations } from 'next-intl/server';",
+      "",
+      "export default async function ${1:ComponentName}Page() {",
+      "  const t = await getTranslations('${2:namespace}');",
+      "",
+      "  return (",
+      "    <div className=\"container mx-auto p-6\">",
+      "      <h1 className=\"text-2xl font-bold mb-6\">{t('${3:title}')}</h1>",
+      "      $0",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a Next.js server page component with next-intl"
+  },
+
+  "Next.js Client Component": {
+    "prefix": "nxclient",
+    "body": [
+      "'use client';",
+      "",
+      "import { useState } from 'react';",
+      "import { useTranslations } from 'next-intl';",
+      "",
+      "export function ${1:ComponentName}() {",
+      "  const t = useTranslations('${2:namespace}');",
+      "  $0",
+      "",
+      "  return (",
+      "    <div>",
+      "      {/* Component content */}",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a Next.js client component with next-intl"
+  },
+
+  "Custom Hook": {
+    "prefix": "nxhook",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "export function use${1:HookName}() {",
+      "  const [data, setData] = useState${2:<any>}(${3:null});",
+      "  const [loading, setLoading] = useState(true);",
+      "  const [error, setError] = useState${4:<Error | null>}(null);",
+      "",
+      "  useEffect(() => {",
+      "    fetch${1:HookName}();",
+      "  }, []);",
+      "",
+      "  const fetch${1:HookName} = async () => {",
+      "    try {",
+      "      setLoading(true);",
+      "      $0",
+      "      setLoading(false);",
+      "    } catch (err) {",
+      "      setError(err as Error);",
+      "      setLoading(false);",
+      "    }",
+      "  };",
+      "",
+      "  return { data, loading, error, refetch: fetch${1:HookName} };",
+      "}"
+    ],
+    "description": "Create a custom React hook with loading and error states"
+  },
+
+  "API Route Handler": {
+    "prefix": "nxapi",
+    "body": [
+      "import { NextRequest, NextResponse } from 'next/server';",
+      "",
+      "export async function ${1|GET,POST,PUT,PATCH,DELETE|}(request: NextRequest) {",
+      "  try {",
+      "    $0",
+      "",
+      "    return NextResponse.json({",
+      "      success: true,",
+      "      data: {}",
+      "    }, { status: 200 });",
+      "  } catch (error) {",
+      "    console.error('Error:', error);",
+      "    return NextResponse.json(",
+      "      { success: false, error: 'Internal server error' },",
+      "      { status: 500 }",
+      "    );",
+      "  }",
+      "}"
+    ],
+    "description": "Create a Next.js API route handler"
+  },
+
+  // TypeScript/Zod Snippets
+  "Zod Schema with Type": {
+    "prefix": "zodschema",
+    "body": [
+      "import { z } from 'zod';",
+      "",
+      "export const ${1:Schema}Schema = z.object({",
+      "  id: z.string(),",
+      "  $0",
+      "});",
+      "",
+      "export type ${1:Schema} = z.infer<typeof ${1:Schema}Schema>;",
+      "",
+      "export const Create${1:Schema}Schema = ${1:Schema}Schema.omit({",
+      "  id: true,",
+      "});"
+    ],
+    "description": "Create a Zod schema with TypeScript type"
+  },
+
+  // Flask API Snippets
+  "Flask Blueprint Route": {
+    "prefix": "flaskroute",
+    "body": [
+      "@${1:blueprint_name}.route('/api/${2:endpoint}', methods=['${3|GET,POST,PUT,PATCH,DELETE|}'])",
+      "def ${4:function_name}():",
+      "    try:",
+      "        tenant_id = request.tenant_id",
+      "        $0",
+      "",
+      "        return jsonify({",
+      "            'success': True,",
+      "            'data': {}",
+      "        }), 200",
+      "",
+      "    except Exception as e:",
+      "        return jsonify({",
+      "            'success': False,",
+      "            'error': str(e)",
+      "        }), 500"
+    ],
+    "description": "Create a Flask blueprint route with error handling"
+  },
+
+  "Pydantic Model": {
+    "prefix": "pydantic",
+    "body": [
+      "from pydantic import BaseModel, Field",
+      "",
+      "class ${1:ModelName}(BaseModel):",
+      "    ${2:field_name}: ${3:str} = Field(..., ${4:min_length=1})",
+      "    $0"
+    ],
+    "description": "Create a Pydantic model for request validation"
+  },
+
+  // Firestore Snippets
+  "Firestore Query (Frontend)": {
+    "prefix": "fsquery",
+    "body": [
+      "const ${1:collectionName}Ref = collection(db, '${1:collectionName}');",
+      "const q = query(",
+      "  ${1:collectionName}Ref,",
+      "  where('tenant_id', '==', tenantId),",
+      "  $0",
+      ");",
+      "const snapshot = await getDocs(q);",
+      "const data = snapshot.docs.map(doc => ({",
+      "  id: doc.id,",
+      "  ...doc.data()",
+      "}));"
+    ],
+    "description": "Create a Firestore query with tenant isolation"
+  },
+
+  "Firestore Query (Backend)": {
+    "prefix": "fsquerypy",
+    "body": [
+      "${1:collection}_ref = db.collection('${1:collection}')",
+      "query = ${1:collection}_ref.where('tenant_id', '==', tenant_id)",
+      "$0",
+      "results = [doc.to_dict() for doc in query.stream()]"
+    ],
+    "description": "Create a Firestore query in Python with tenant isolation"
+  },
+
+  // Component Patterns
+  "Loading State Component": {
+    "prefix": "loading",
+    "body": [
+      "if (loading) {",
+      "  return (",
+      "    <div className=\"flex items-center justify-center p-8\">",
+      "      <div className=\"animate-spin rounded-full h-8 w-8 border-b-2 border-primary\"></div>",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Loading state component"
+  },
+
+  "Error State Component": {
+    "prefix": "errorstate",
+    "body": [
+      "if (error) {",
+      "  return (",
+      "    <div className=\"rounded-lg bg-destructive/10 p-4 text-destructive\">",
+      "      <p className=\"font-semibold\">Error</p>",
+      "      <p className=\"text-sm\">{error.message}</p>",
+      "    </div>",
+      "  );",
+      "}"
+    ],
+    "description": "Error state component"
+  },
+
+  // Testing Snippets
+  "React Component Test": {
+    "prefix": "testcomponent",
+    "body": [
+      "import { render, screen } from '@testing-library/react';",
+      "import { ${1:ComponentName} } from './${1:ComponentName}';",
+      "",
+      "describe('${1:ComponentName}', () => {",
+      "  it('renders correctly', () => {",
+      "    render(<${1:ComponentName} />);",
+      "    $0",
+      "    expect(screen.getByText('${2:text}')).toBeInTheDocument();",
+      "  });",
+      "});"
+    ],
+    "description": "Create a React component test"
+  },
+
+  "Python Test Function": {
+    "prefix": "pytest",
+    "body": [
+      "def test_${1:function_name}():",
+      "    # Arrange",
+      "    $0",
+      "",
+      "    # Act",
+      "    ",
+      "",
+      "    # Assert",
+      "    assert True"
+    ],
+    "description": "Create a pytest test function"
+  },
+
+  // Git Commit Message
+  "Conventional Commit": {
+    "prefix": "commit",
+    "body": [
+      "${1|feat,fix,refactor,docs,style,test,chore,perf,ci,build|}(${2|api,store-portal,marketplace,company-profile,platform-admin,firebase-client,shared-types,ui-web,auth,products,inventory,orders,payments,customers,reports|}): ${3:description}",
+      "",
+      "$0"
+    ],
+    "description": "Create a conventional commit message"
+  }
+}
