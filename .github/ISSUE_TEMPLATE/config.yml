@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/your-org/pos_app_v1/tree/main/docs
+    about: Check our comprehensive documentation for guides and references
+  - name: 💬 Team Discussion
+    url: https://github.com/your-org/pos_app_v1/discussions
+    about: Ask questions and discuss ideas with the team
+  - name: 🚀 Sprint Planning
+    url: https://github.com/your-org/pos_app_v1/blob/main/docs/sprint/README.md
+    about: View sprint planning and story management guide

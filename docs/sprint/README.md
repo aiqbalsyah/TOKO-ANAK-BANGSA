@@ -93,27 +93,29 @@ claude
 ## Documentation Location
 
 ### Cross-Project Features
-Features spanning multiple projects (e.g., "Artist track orders"):
+Features spanning multiple projects (e.g., "Product management across store and marketplace"):
 
 ```
-docs/todos/artist-track-orders.md           # Main feature doc
-projects/api/docs/todos/artist-track-orders.md      # API implementation
-projects/mobile/docs/todos/artist-track-orders.md   # Mobile implementation
-projects/webapp/docs/todos/artist-track-orders.md   # Webapp implementation
+docs/todos/product-sync.md                          # Main feature doc
+apps/api/docs/todos/product-sync-api.md             # API implementation
+apps/store-portal/docs/todos/product-sync-admin.md  # Store Portal implementation
+apps/marketplace/docs/todos/product-sync-display.md # Marketplace implementation
 ```
 
 ### Project-Specific Features
 Features for a single project:
 
 ```
-projects/api/docs/todos/refactor-auth.md
-projects/mobile/docs/todos/player-ui.md
-projects/webapp/docs/todos/dashboard-charts.md
+apps/api/docs/todos/auth-api.md
+apps/store-portal/docs/todos/pos-interface.md
+apps/marketplace/docs/todos/checkout-flow.md
+apps/company-profile/docs/todos/contact-form.md
+apps/platform-admin/docs/todos/tenant-management.md
 ```
 
 ### Rule
-- **Cross-project** → `docs/todos/` + each project's `docs/todos/`
-- **Single project** → only that project's `docs/todos/`
+- **Cross-project** → `docs/todos/` + each app's `docs/todos/`
+- **Single project** → only that app's `docs/todos/`
 
 ## Todo Format
 
@@ -152,28 +154,24 @@ As a [user type], I want to [action] so that [benefit].
 
 ## Implementation Checklist
 
-### API (projects/api)
-- [ ] Create use case in `src/usecases/`
-- [ ] Add repository methods in `src/repositories/`
-- [ ] Create route in `src/routes/`
-- [ ] Add validation schema in `src/schemas/`
-- [ ] Update types in `src/types/`
-- [ ] Add error codes if needed
+### API (apps/api)
+- [ ] Create route in `routes/`
+- [ ] Add Pydantic models in `models/`
+- [ ] Implement business logic in `services/`
+- [ ] Add middleware for auth/tenant isolation
+- [ ] Update Firestore operations
+- [ ] Add error handling
 - [ ] Write tests
 
-### Mobile (projects/mobile)
-- [ ] Create service in `services/`
-- [ ] Add types in `types/`
-- [ ] Create screen in `app/`
+### Frontend (apps/store-portal, marketplace, etc.)
+- [ ] Create page in `app/[locale]/(dashboard)/`
 - [ ] Build components in `components/`
-- [ ] Update store if needed
-- [ ] Add translations in `locales/`
-
-### Webapp (projects/webapp)
-- [ ] Create API client
-- [ ] Build page component
-- [ ] Add UI components
-- [ ] Handle loading/error states
+- [ ] Create custom hooks in `hooks/`
+- [ ] Add types from `@toko/shared-types`
+- [ ] Use UI components from `@toko/ui-web`
+- [ ] Implement form validation with Zod
+- [ ] Add translations in `messages/id.json` and `messages/en.json`
+- [ ] Test on multiple screen sizes
 
 ## Dependencies
 - List any blockers or dependencies on other features
@@ -282,27 +280,30 @@ Format: `<type>/<project>/<feature>`
 - `docs/` - Documentation only
 
 ### Projects
-- `api` - Backend API
-- `mobile` - Mobile app
-- `webapp` - Web application
+- `api` - Backend API (Flask)
+- `store-portal` - Store Portal (POS & Store Management)
+- `marketplace` - Marketplace (E-commerce)
+- `company-profile` - Company Profile (Landing Page)
+- `platform-admin` - Platform Admin
+- `cross` - Multiple apps
 
 ### Examples
 
 ```bash
 # Feature branches
-git checkout -b feature/api/music-streaming
-git checkout -b feature/api/wallet-topup
-git checkout -b feature/mobile/player-ui
-git checkout -b feature/mobile/push-notifications
-git checkout -b feature/webapp/artist-dashboard
+git checkout -b feature/api/auth-endpoints
+git checkout -b feature/store-portal/pos-interface
+git checkout -b feature/marketplace/checkout-flow
+git checkout -b feature/company-profile/contact-form
+git checkout -b feature/platform-admin/tenant-management
 
 # Bug fix branches
 git checkout -b fix/api/auth-token-refresh
-git checkout -b fix/mobile/crash-on-login
+git checkout -b fix/store-portal/product-form-validation
 
 # Refactor branches
-git checkout -b refactor/api/clean-architecture
-git checkout -b refactor/mobile/state-management
+git checkout -b refactor/api/error-handling
+git checkout -b refactor/store-portal/component-structure
 ```
 
 ## Commit Messages
@@ -326,30 +327,33 @@ Format: `<type>(<scope>): <description>`
 | Scope | Description |
 |-------|-------------|
 | `api` | Backend API changes |
-| `mobile` | Mobile app changes |
-| `webapp` | Web app changes |
+| `store-portal` | Store Portal changes |
+| `marketplace` | Marketplace changes |
+| `company-profile` | Company Profile changes |
+| `platform-admin` | Platform Admin changes |
 | `auth` | Authentication related |
-| `wallet` | Wallet/payment related |
-| `messaging` | Chat/messaging related |
+| `products` | Product management |
+| `orders` | Order management |
+| `payments` | Payment integration |
 
 ### Examples
 
 ```bash
 # Features
-git commit -m "feat(api): add music streaming endpoint"
-git commit -m "feat(mobile): implement player UI"
-git commit -m "feat(webapp): add artist dashboard"
+git commit -m "feat(api): add product management endpoints"
+git commit -m "feat(store-portal): implement POS interface"
+git commit -m "feat(marketplace): add shopping cart"
 
 # Bug fixes
 git commit -m "fix(api): resolve token refresh issue"
-git commit -m "fix(mobile): crash on login for iOS 17"
+git commit -m "fix(store-portal): product form validation error"
 
 # Refactoring
-git commit -m "refactor(api): move validation to use cases"
-git commit -m "refactor(mobile): simplify auth store"
+git commit -m "refactor(api): improve error handling"
+git commit -m "refactor(marketplace): simplify cart state"
 
 # Other
-git commit -m "docs(api): update wallet endpoints"
+git commit -m "docs(api): update product endpoints"
 git commit -m "test(api): add auth unit tests"
 git commit -m "chore: update dependencies"
 ```
