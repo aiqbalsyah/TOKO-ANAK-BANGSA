@@ -1,0 +1,29 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "cart": {
+      "$userId": {
+        ".read": "auth != null && auth.uid == $userId",
+        ".write": "auth != null && auth.uid == $userId"
+      }
+    },
+
+    "inventory": {
+      "$tenantId": {
+        "$productId": {
+          ".read": true,
+          ".write": "auth != null"
+        }
+      }
+    },
+
+    "online_users": {
+      "$userId": {
+        ".read": true,
+        ".write": "auth != null && auth.uid == $userId"
+      }
+    }
+  }
+}

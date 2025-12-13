@@ -1,0 +1,3 @@
+# Firebase
+
+Firebase configuration files

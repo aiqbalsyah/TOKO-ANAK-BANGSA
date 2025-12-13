@@ -1,0 +1,123 @@
+{
+  "common": {
+    "appName": "Store Portal",
+    "welcome": "Welcome to Store Portal",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me"
+  },
+  "home": {
+    "title": "Home",
+    "description": "Toko Anak Bangsa - Store Portal",
+    "subtitle": "POS & Store Management System",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "features": {
+      "pos": {
+        "title": "Point of Sale",
+        "description": "Fast and efficient POS system for your store"
+      },
+      "inventory": {
+        "title": "Inventory Management",
+        "description": "Track and manage your products easily"
+      },
+      "reports": {
+        "title": "Reports & Analytics",
+        "description": "Real-time insights for better decisions"
+      }
+    },
+    "environmentInfo": "Environment: {env}",
+    "authStatus": {
+      "signedIn": "Signed in as {email}",
+      "signedOut": "Not signed in",
+      "userId": "User ID: {uid}",
+      "goToDashboard": "Go to Dashboard"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "todaySales": "Today's Sales",
+    "totalOrders": "Total Orders",
+    "totalCustomers": "Total Customers",
+    "totalProducts": "Total Products",
+    "recentOrders": "Recent Orders",
+    "topProducts": "Top Products",
+    "salesChart": "Sales Chart"
+  },
+  "products": {
+    "title": "Products",
+    "addProduct": "Add Product",
+    "editProduct": "Edit Product",
+    "deleteProduct": "Delete Product",
+    "productName": "Product Name",
+    "productCode": "Product Code",
+    "category": "Category",
+    "price": "Price",
+    "stock": "Stock",
+    "description": "Description",
+    "images": "Images"
+  },
+  "orders": {
+    "title": "Orders",
+    "newOrder": "New Order",
+    "orderNumber": "Order Number",
+    "customer": "Customer",
+    "date": "Date",
+    "total": "Total",
+    "status": "Status",
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "customers": {
+    "title": "Customers",
+    "addCustomer": "Add Customer",
+    "customerName": "Customer Name",
+    "phone": "Phone",
+    "address": "Address",
+    "totalOrders": "Total Orders",
+    "totalSpent": "Total Spent"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General Settings",
+    "store": "Store Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications",
+    "security": "Security",
+    "billing": "Billing"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "pageNotFound": "Page not found",
+    "unauthorized": "Unauthorized access",
+    "serverError": "Server error",
+    "networkError": "Network error",
+    "invalidCredentials": "Invalid credentials",
+    "requiredField": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "passwordMismatch": "Passwords do not match",
+    "minLength": "Minimum {count} characters required",
+    "maxLength": "Maximum {count} characters allowed"
+  }
+}

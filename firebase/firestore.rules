@@ -1,0 +1,109 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isTenantMember(tenantId) {
+      return isAuthenticated() &&
+             exists(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid));
+    }
+
+    function isTenantOwner(tenantId) {
+      return isAuthenticated() &&
+             get(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)).data.role == 'owner';
+    }
+
+    function canManageTenant(tenantId) {
+      return isAuthenticated() &&
+             get(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)).data.role in ['owner', 'manager', 'admin'];
+    }
+
+    // Users collection (global user profiles)
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isOwner(userId);
+      allow update, delete: if isOwner(userId);
+    }
+
+    // Tenants (Stores) - multi-tenant root
+    match /tenants/{tenantId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isTenantOwner(tenantId);
+
+      // Tenant members (RBAC)
+      match /members/{memberId} {
+        allow read: if isTenantMember(tenantId);
+        allow create, update, delete: if canManageTenant(tenantId);
+      }
+
+      // Products
+      match /products/{productId} {
+        allow read: if true; // Public read for marketplace
+        allow create, update, delete: if isTenantMember(tenantId);
+      }
+
+      // Orders
+      match /orders/{orderId} {
+        allow read: if isTenantMember(tenantId) ||
+                       (isAuthenticated() && resource.data.customerId == request.auth.uid);
+        allow create: if isAuthenticated();
+        allow update: if isTenantMember(tenantId);
+        allow delete: if isTenantOwner(tenantId);
+      }
+
+      // Customers (store-specific customer data)
+      match /customers/{customerId} {
+        allow read: if isTenantMember(tenantId);
+        allow create, update, delete: if isTenantMember(tenantId);
+      }
+
+      // Suppliers
+      match /suppliers/{supplierId} {
+        allow read, write: if isTenantMember(tenantId);
+      }
+
+      // Purchase Orders
+      match /purchase_orders/{poId} {
+        allow read, write: if isTenantMember(tenantId);
+      }
+
+      // Accounts Payable
+      match /accounts_payable/{apId} {
+        allow read, write: if isTenantMember(tenantId);
+      }
+
+      // Accounts Receivable
+      match /accounts_receivable/{arId} {
+        allow read, write: if isTenantMember(tenantId);
+      }
+    }
+
+    // Public products (denormalized for marketplace)
+    match /products_public/{productId} {
+      allow read: if true; // Public read
+      allow write: if false; // Only writable via Cloud Functions
+    }
+
+    // Global orders (customer's cross-store orders)
+    match /orders_global/{orderId} {
+      allow read: if isAuthenticated() && resource.data.customerId == request.auth.uid;
+      allow write: if false; // Only writable via Cloud Functions
+    }
+
+    // Categories (global product categories)
+    match /categories/{categoryId} {
+      allow read: if true; // Public read
+      allow write: if false; // Admin only (via Cloud Functions)
+    }
+  }
+}

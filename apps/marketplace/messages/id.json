@@ -1,0 +1,123 @@
+{
+  "common": {
+    "appName": "Portal Toko",
+    "welcome": "Selamat Datang di Portal Toko",
+    "loading": "Memuat...",
+    "error": "Error",
+    "success": "Berhasil",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "edit": "Ubah",
+    "add": "Tambah",
+    "search": "Cari",
+    "filter": "Filter",
+    "export": "Ekspor",
+    "import": "Impor",
+    "settings": "Pengaturan",
+    "logout": "Keluar",
+    "login": "Masuk",
+    "signIn": "Masuk",
+    "signUp": "Daftar",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "confirmPassword": "Konfirmasi Kata Sandi",
+    "forgotPassword": "Lupa Kata Sandi?",
+    "rememberMe": "Ingat Saya"
+  },
+  "home": {
+    "title": "Beranda",
+    "description": "Toko Anak Bangsa - Portal Toko",
+    "subtitle": "Sistem Manajemen POS & Toko",
+    "getStarted": "Mulai",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "features": {
+      "pos": {
+        "title": "Point of Sale",
+        "description": "Sistem POS yang cepat dan efisien untuk toko Anda"
+      },
+      "inventory": {
+        "title": "Manajemen Inventori",
+        "description": "Lacak dan kelola produk Anda dengan mudah"
+      },
+      "reports": {
+        "title": "Laporan & Analitik",
+        "description": "Wawasan real-time untuk keputusan yang lebih baik"
+      }
+    },
+    "environmentInfo": "Lingkungan: {env}",
+    "authStatus": {
+      "signedIn": "Masuk sebagai {email}",
+      "signedOut": "Belum masuk",
+      "userId": "ID Pengguna: {uid}",
+      "goToDashboard": "Ke Dashboard"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "todaySales": "Penjualan Hari Ini",
+    "totalOrders": "Total Pesanan",
+    "totalCustomers": "Total Pelanggan",
+    "totalProducts": "Total Produk",
+    "recentOrders": "Pesanan Terbaru",
+    "topProducts": "Produk Terpopuler",
+    "salesChart": "Grafik Penjualan"
+  },
+  "products": {
+    "title": "Produk",
+    "addProduct": "Tambah Produk",
+    "editProduct": "Ubah Produk",
+    "deleteProduct": "Hapus Produk",
+    "productName": "Nama Produk",
+    "productCode": "Kode Produk",
+    "category": "Kategori",
+    "price": "Harga",
+    "stock": "Stok",
+    "description": "Deskripsi",
+    "images": "Gambar"
+  },
+  "orders": {
+    "title": "Pesanan",
+    "newOrder": "Pesanan Baru",
+    "orderNumber": "Nomor Pesanan",
+    "customer": "Pelanggan",
+    "date": "Tanggal",
+    "total": "Total",
+    "status": "Status",
+    "pending": "Menunggu",
+    "completed": "Selesai",
+    "cancelled": "Dibatalkan"
+  },
+  "customers": {
+    "title": "Pelanggan",
+    "addCustomer": "Tambah Pelanggan",
+    "customerName": "Nama Pelanggan",
+    "phone": "Telepon",
+    "address": "Alamat",
+    "totalOrders": "Total Pesanan",
+    "totalSpent": "Total Belanja"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "general": "Pengaturan Umum",
+    "store": "Pengaturan Toko",
+    "language": "Bahasa",
+    "theme": "Tema",
+    "notifications": "Notifikasi",
+    "security": "Keamanan",
+    "billing": "Pembayaran"
+  },
+  "errors": {
+    "somethingWentWrong": "Terjadi kesalahan",
+    "pageNotFound": "Halaman tidak ditemukan",
+    "unauthorized": "Akses tidak diizinkan",
+    "serverError": "Error server",
+    "networkError": "Error jaringan",
+    "invalidCredentials": "Kredensial tidak valid",
+    "requiredField": "Field ini wajib diisi",
+    "invalidEmail": "Alamat email tidak valid",
+    "passwordMismatch": "Kata sandi tidak cocok",
+    "minLength": "Minimal {count} karakter diperlukan",
+    "maxLength": "Maksimal {count} karakter diizinkan"
+  }
+}

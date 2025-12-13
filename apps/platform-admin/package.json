@@ -1,0 +1,31 @@
+{
+  "name": "@toko/platform-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Platform Administration Panel - TOKO ANAK BANGSA",
+  "scripts": {
+    "dev": "next dev --turbopack --port 3003",
+    "build": "next build",
+    "start": "next start --port 3003",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@toko/firebase-client": "workspace:*",
+    "@toko/shared-types": "workspace:*",
+    "@toko/ui-web": "workspace:*",
+    "next": "^16.0.0",
+    "next-intl": "^4.6.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

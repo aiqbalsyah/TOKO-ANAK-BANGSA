@@ -1,0 +1,43 @@
+# Sprint Status Tracker for TOKO ANAK BANGSA
+# Update this file before starting work on a story
+
+# Current Sprint
+current_sprint: 0
+sprint:
+  name: "Sprint 0 - Infrastructure Setup"
+  start_date: "2024-12-13"
+  end_date: "2024-12-13"
+  status: "completed"
+
+# Sprint 0 completed - see docs/sprint/sprint-0-completion.md
+sprint_0_completed: true
+sprint_0_doc: "docs/sprint/sprint-0-completion.md"
+
+# Next Sprint Planning
+next_sprint:
+  number: 1
+  name: "Sprint 1 - Core POS Features"
+  planned: true
+  planning_doc: "docs/sprint/sprint-1-planning.md"
+  start_date: "TBD"
+  end_date: "TBD"
+
+# Team members
+team:
+  - id: iqbal
+    name: "Iqbal"
+    role: "Full Stack Developer"
+    active: true
+
+# Story status: backlog | in_progress | review | done
+# Stories will be added here when created via pnpm story:create
+stories:
+  - id: API-001
+    title: "Auth API - Registration & Login"
+    type: feature
+    project: api
+    assignee: iqbal
+    status: backlog
+    branch: "feature/api/auth-api-registration-login"
+    docs: "apps/api/docs/todos/auth-api-registration-login.md"
+    category: AUTH

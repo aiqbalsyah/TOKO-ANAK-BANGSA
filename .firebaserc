@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "toko-anak-bangsa-dev",
+    "dev": "toko-anak-bangsa-dev",
+    "staging": "toko-anak-bangsa-staging",
+    "prod": "toko-anak-bangsa-prod"
+  }
+}

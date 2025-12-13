@@ -1,0 +1,49 @@
+{
+  "name": "toko-anak-bangsa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TOKO ANAK BANGSA - Multi-tenant POS & Marketplace Platform for Indonesian SMEs",
+  "packageManager": "pnpm@10.24.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean",
+    "test": "turbo run test",
+    "dev:api": "cd apps/api && python -m flask run --debug --port 8080",
+    "dev:store-portal": "pnpm --filter @toko/store-portal dev",
+    "dev:marketplace": "pnpm --filter @toko/marketplace dev",
+    "dev:company-profile": "pnpm --filter @toko/company-profile dev",
+    "dev:platform-admin": "pnpm --filter @toko/platform-admin dev",
+    "build:store-portal": "pnpm --filter @toko/store-portal build",
+    "build:marketplace": "pnpm --filter @toko/marketplace build",
+    "build:company-profile": "pnpm --filter @toko/company-profile build",
+    "build:platform-admin": "pnpm --filter @toko/platform-admin build",
+    "deploy:api": "firebase deploy --only apphosting:api",
+    "deploy:store-portal": "firebase deploy --only apphosting:store-portal",
+    "deploy:marketplace": "firebase deploy --only apphosting:marketplace",
+    "deploy:company-profile": "firebase deploy --only apphosting:company-profile",
+    "deploy:platform-admin": "firebase deploy --only apphosting:platform-admin",
+    "deploy:all": "firebase deploy",
+    "firebase:emulators": "firebase emulators:start",
+    "story:create": "node scripts/create-story.js"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.7.4",
+    "turbo": "^2.6.3"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

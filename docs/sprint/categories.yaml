@@ -1,0 +1,75 @@
+# Story Categories for POS Marketplace
+# Format: KEY: Description
+
+# Authentication & User Management
+AUTH: "Authentication and authorization"
+PROFILE: "User profiles and settings"
+RBAC: "Role-based access control"
+
+# Store Management
+STORE: "Store creation and management"
+STORE_SETTINGS: "Store configuration and settings"
+ONBOARDING: "Store owner onboarding"
+
+# Product Management
+PRODUCT: "Product CRUD operations"
+PRODUCT_PRICING: "Multi-tier pricing (A, B, C)"
+PRODUCT_UNITS: "Unit packages (DUS, PACK, PCS)"
+PRODUCT_VARIANT: "Product variants"
+INVENTORY: "Inventory tracking and management"
+
+# Order Management
+ORDER: "Order processing and management"
+CHECKOUT: "Checkout flow"
+ORDER_STATUS: "Order status tracking"
+
+# POS Cashier
+POS: "Point of Sale (in-store transactions)"
+CASHIER: "Cashier interface and operations"
+RECEIPT: "Receipt printing and generation"
+
+# Marketplace
+MARKETPLACE: "Marketplace features"
+SEARCH: "Product and store search"
+DISCOVERY: "Store and product discovery"
+REVIEWS: "Reviews and ratings"
+
+# Financial Management
+PURCHASING: "Purchase orders and supplier management"
+ACCOUNTS_PAYABLE: "Accounts payable - store debt to suppliers (AP)"
+ACCOUNTS_RECEIVABLE: "Accounts receivable - customer credit (AR)"
+PAYMENT: "Payment processing"
+SUPPLIER: "Supplier management"
+
+# Shipping & Delivery
+SHIPPING: "Shipping cost calculation (RajaOngkir)"
+DELIVERY: "Delivery tracking"
+
+# Payment Integration
+MIDTRANS: "Midtrans payment gateway"
+PAYMENT_METHOD: "Payment methods"
+
+# Analytics & Reporting
+ANALYTICS: "Analytics and dashboards"
+REPORTS: "Financial reports"
+CASHFLOW: "Cash flow management"
+
+# Customer Management
+CUSTOMER: "Customer management"
+CUSTOMER_CREDIT: "Customer credit management"
+
+# Platform Admin
+ADMIN: "Platform administration"
+TENANT_MGMT: "Tenant/store management"
+MODERATION: "Content moderation"
+
+# Infrastructure
+FIREBASE: "Firebase integration"
+HOSTING: "Firebase App Hosting"
+FUNCTIONS: "Cloud Functions"
+
+# General
+DOCS: "Documentation"
+SETUP: "Project setup and configuration"
+TESTING: "Testing and QA"
+OTHER: "Other tasks"
