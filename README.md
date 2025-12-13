@@ -96,14 +96,17 @@ pos_app_v1/
 │   ├── storage.rules           # Storage security rules
 │   └── database.rules.json     # RTDB security rules
 ├── apphosting.*.yaml           # Firebase App Hosting configs
+├── docs/
+│   ├── features/               # Feature specifications (01-14.md)
+│   ├── deployment/             # Deployment guides
+│   ├── sprint/                 # Sprint planning & tracking
+│   └── archive/                # Archived documentation
 ├── firebase.json               # Firebase configuration
 ├── turbo.json                  # Turborepo configuration
 ├── pnpm-workspace.yaml         # pnpm workspace configuration
 ├── .env.local                  # Development environment
 ├── .env.staging                # Staging environment
-├── .env.production             # Production environment
-├── DEVELOPER_GUIDE.md          # Component architecture guide
-└── ENVIRONMENTS.md             # Environment configuration guide
+└── .env.production             # Production environment
 ```
 
 ---
@@ -155,10 +158,10 @@ cd ../..
 
 ```bash
 # Copy environment variables
-cp .env.local .env.local.backup  # Backup if exists
+cp .env.example .env.local
 ```
 
-Make sure `.env.local` contains your Firebase development credentials. See [ENVIRONMENTS.md](./ENVIRONMENTS.md) for details.
+Make sure `.env.local` contains your Firebase development credentials. See [docs/deployment/environments.md](./docs/deployment/environments.md) for details.
 
 ### 4. Build Shared Packages
 
@@ -250,19 +253,25 @@ pnpm add -D -w package-name
 
 ### Creating a New Page
 
-See the [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) for detailed instructions on creating new pages with the proper component architecture.
+See the app-specific development guides and CLAUDE.md files for detailed instructions:
 
-Example structure:
+- **Store Portal**: `apps/store-portal/CLAUDE.md` & `apps/store-portal/docs/dev-guide/01-setup.md`
+- **Marketplace**: `apps/marketplace/CLAUDE.md` & `apps/marketplace/docs/dev-guide/01-setup.md`
+- **API**: `apps/api/CLAUDE.md` & `apps/api/docs/dev-guide/01-setup.md`
+
+Example Next.js 16 App Router structure:
 ```
-components/pages/dashboard/
-├── index.tsx              # Main component (composition)
-├── components/            # Sub-components (presentation)
-│   ├── stats-grid.tsx
-│   └── recent-orders.tsx
-├── hooks/                 # Custom hooks (logic)
-│   └── use-dashboard-data.ts
-└── utils/                 # Helper functions
-    └── format-stats.ts
+app/[locale]/(dashboard)/products/
+├── page.tsx              # Main page component
+├── [id]/page.tsx         # Detail page
+└── create/page.tsx       # Create page
+
+components/products/
+├── ProductCard.tsx       # Presentation components
+└── ProductForm.tsx
+
+hooks/
+└── useProducts.ts        # Custom hooks
 ```
 
 ### Firebase Emulators
@@ -337,14 +346,37 @@ Each app has its own App Hosting configuration:
 - `apphosting.platform-admin.yaml` - Platform Admin
 - `apphosting.api.yaml` - Flask API
 
-See [ENVIRONMENTS.md](./ENVIRONMENTS.md) for detailed environment setup and deployment procedures.
+See [docs/deployment/environments.md](./docs/deployment/environments.md) for detailed environment setup and deployment procedures.
 
 ---
 
 ## Documentation
 
-- **[DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)** - Complete guide for developers including component architecture, best practices, and workflow
-- **[ENVIRONMENTS.md](./ENVIRONMENTS.md)** - Environment configuration and deployment guide
+### Project Documentation
+
+**Feature Specifications** (`docs/features/`):
+- `01-authentication.md` - User authentication & session management
+- `02-tenant-management.md` - Multi-tenant isolation
+- `03-product-management.md` - Product CRUD, variants, pricing
+- `04-inventory-management.md` - Stock tracking & adjustments
+- `05-pos-cashier.md` - Point of Sale operations
+- `06-order-management.md` - Order processing & fulfillment
+- `07-customer-management.md` - Customer database & tiers
+- `08-supplier-purchasing.md` - Supplier management & procurement
+- `09-financial-management.md` - Cash flow & reporting
+- `10-marketplace.md` - Online storefront & e-commerce
+- `11-reports-analytics.md` - Business intelligence
+- `12-notifications.md` - Alerts & communication
+- `13-settings.md` - Configuration & preferences
+- `14-platform-admin.md` - System administration
+
+**Development Guides** (in each app/package):
+- `apps/*/docs/dev-guide/01-setup.md` - Project-specific setup & patterns
+- `apps/*/CLAUDE.md` - AI-assisted development guides
+- `packages/*/docs/dev-guide/01-setup.md` - Package usage guides
+
+**Deployment**:
+- `docs/deployment/environments.md` - Environment configuration & deployment
 
 ### External Resources
 
@@ -431,12 +463,13 @@ chore(deps): upgrade Next.js to 16.1.0
 
 ### Development Workflow
 
-1. Create feature branch: `git checkout -b feature/dashboard-page`
-2. Make changes following the [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
-3. Type check: `pnpm typecheck`
-4. Lint: `pnpm lint`
-5. Commit: `git commit -m "feat(store-portal): add dashboard page"`
-6. Push and create PR: `git push origin feature/dashboard-page`
+1. Create story: `pnpm create story` (generates todo file and branch)
+2. Fill story: `/fill-story [todo-file]` (AI fills in details from feature docs)
+3. Implement: Follow patterns in `apps/[app]/CLAUDE.md` and `docs/dev-guide/01-setup.md`
+4. Type check: `pnpm typecheck`
+5. Lint: `pnpm lint`
+6. Commit: `git commit -m "feat(store-portal): add dashboard page"`
+7. Push and create PR: `git push origin feature/dashboard-page`
 
 ---
 
@@ -478,7 +511,10 @@ Proprietary - All rights reserved
 
 For questions or issues:
 
-1. Check the [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+1. Check the relevant documentation:
+   - Feature specs: `docs/features/`
+   - Dev guides: `apps/*/docs/dev-guide/01-setup.md`
+   - CLAUDE.md files for AI-assisted development patterns
 2. Search existing GitHub issues
 3. Contact the development team
 4. Create a new GitHub issue with detailed reproduction steps
