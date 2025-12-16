@@ -169,9 +169,40 @@ Authentication and authorization system that allows users to securely register, 
 
 ### 6. Role-Based Access Control (RBAC)
 
-**Description**: Different user roles have different permissions and access levels.
+**Description**: Dynamic, hierarchical role system with customizable permissions per tenant.
 
-**User Roles**:
+**IMPORTANT**: Roles are now dynamic and tenant-specific. System roles (super_admin, owner, member) are predefined and read-only. Tenants can create unlimited custom roles with specific permission sets.
+
+**Role Hierarchy**:
+- **Level 100**: Super Admin (platform administrator)
+- **Level 90**: Owner (tenant owner - full access)
+- **Level 70**: Admin (custom role - most permissions)
+- **Level 50**: Manager (custom role - operational permissions)
+- **Level 30**: Staff (custom role - limited permissions)
+- **Level 10**: Member/Viewer (basic access)
+
+Custom roles (levels 1-89) can be created by tenant owners/admins with any combination of permissions.
+
+**System Roles** (predefined, cannot be modified):
+
+**Super Admin** (Platform):
+- Platform-wide administrator
+- Can manage all tenants
+- System configuration access
+
+**Owner** (Tenant):
+- Full access to all tenant features
+- Can create and manage custom roles
+- Can manage staff and permissions
+- Can view all reports and analytics
+- Can configure store settings
+- Can manage subscription and billing
+
+**Member** (Tenant):
+- Basic view-only access
+- Starting point for custom roles
+
+**Custom Role Examples** (tenant-defined):
 
 **Owner** (Store Portal):
 - Full access to all store features

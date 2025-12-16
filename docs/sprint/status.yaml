@@ -4,40 +4,98 @@
 # Current Sprint
 current_sprint: 0
 sprint:
-  name: "Sprint 0 - Infrastructure Setup"
-  start_date: "2024-12-13"
-  end_date: "2024-12-13"
-  status: "completed"
+  name: 'Sprint 0 - Infrastructure Setup'
+  start_date: '2024-12-13'
+  end_date: '2024-12-13'
+  status: 'completed'
 
 # Sprint 0 completed - see docs/sprint/sprint-0-completion.md
 sprint_0_completed: true
-sprint_0_doc: "docs/sprint/sprint-0-completion.md"
+sprint_0_doc: 'docs/sprint/sprint-0-completion.md'
 
 # Next Sprint Planning
 next_sprint:
   number: 1
-  name: "Sprint 1 - Core POS Features"
+  name: 'Sprint 1 - Core POS Features'
   planned: true
-  planning_doc: "docs/sprint/sprint-1-planning.md"
-  start_date: "TBD"
-  end_date: "TBD"
+  planning_doc: 'docs/sprint/sprint-1-planning.md'
+  start_date: 'TBD'
+  end_date: 'TBD'
 
 # Team members
 team:
   - id: iqbal
-    name: "Iqbal"
-    role: "Full Stack Developer"
+    name: 'Iqbal'
+    role: 'Full Stack Developer'
     active: true
 
 # Story status: backlog | in_progress | review | done
 # Stories will be added here when created via pnpm story:create
 stories:
-  - id: API-001
-    title: "Auth API - Registration & Login"
+  - id: API-003
+    title: 'Auth Sytem and Profile Management'
     type: feature
     project: api
     assignee: iqbal
-    status: backlog
-    branch: "feature/api/auth-api-registration-login"
-    docs: "apps/api/docs/todos/auth-api-registration-login.md"
+    status: in-progress
+    implementation_status: incomplete  # Code review found critical issues
+    setup_status: complete  # Firebase configured, database seeded, server tested
+    current_phase: code-review-fixes  # Phase 12: Addressing code review findings
+    branch: 'feature/api/auth-sytem-and-profile-management'
+    docs: 'apps/api/docs/todos/auth-sytem-and-profile-management.md'
     category: AUTH
+    blockers:
+      - Password verification not implemented (login accepts any password!)
+      - Logout doesn't revoke tokens (security issue)
+      - Delete account doesn't verify password
+      - No tests written (Phase 10 incomplete)
+    notes: |
+      Code Review completed 2025-12-15:
+      - 7 CRITICAL/HIGH security issues found
+      - 3 issues auto-fixed (.gitignore, bcrypt import, error handling)
+      - 4 CRITICAL issues require implementation before completion
+      - All Acceptance Criteria still unchecked (testing needed)
+      - Firebase-service-account.json protection added to .gitignore
+
+      Setup completed 2025-12-13:
+      - Python 3.12 venv created with all dependencies
+      - Firebase service account configured
+      - Firestore API enabled and database seeded
+      - All 12 auth endpoints registered (but auth broken!)
+      - Rate limiting active on all endpoints
+
+  - id: API-004
+    title: 'Role Management API'
+    type: feature
+    project: api
+    assignee: iqbal
+    status: in-progress
+    implementation_status: incomplete  # Code review found critical issues
+    current_phase: code-review-fixes  # Phase 8: Addressing performance issues
+    branch: 'feature/api/auth-sytem-and-profile-management'
+    docs: 'apps/api/docs/todos/role-management-api.md'
+    category: RBAC
+    prerequisites: API-003 (also has critical bugs)
+    blockers:
+      - get_users_with_role() scans ALL users (performance disaster!)
+      - count_users_with_role() also scans all users (delete will be slow)
+      - ROLE_TEMPLATES import will crash (not defined)
+      - list_roles() filtering not applied in Firestore
+    notes: |
+      Code Review completed 2025-12-15:
+      - 4 CRITICAL/HIGH performance issues found
+      - get_users_with_role() will cause massive Firestore costs at scale
+      - count_users_with_role() makes delete unusably slow
+      - Filtering happens in Python instead of Firestore (inefficient)
+      - ROLE_TEMPLATES undefined - templates endpoint will crash
+      - No validation preventing users from creating roles at their own level
+
+      Implementation completed 2025-12-13:
+      - All 8 role management endpoints implemented
+      - routes/roles.py (420+ lines) with CRUD operations
+      - services/role_service.py (600+ lines) enhanced with full CRUD
+      - Rate limiting: 5-50/hour based on operation type
+      - Blueprint registered in app.py
+      - Soft delete implemented for role deletion
+      - Permission inheritance support
+      - Postman collection created for testing

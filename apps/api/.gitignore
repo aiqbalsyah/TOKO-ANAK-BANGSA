@@ -23,6 +23,7 @@ instance/
 # Firebase Service Account (NEVER COMMIT THIS!)
 serviceAccountKey.json
 *-firebase-adminsdk-*.json
+firebase-service-account.json
 
 # Logs
 *.log
