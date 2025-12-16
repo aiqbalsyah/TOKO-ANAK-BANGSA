@@ -9,6 +9,7 @@
 export * from './schemas/common';
 export * from './schemas/tenant';
 export * from './schemas/user';
+export * from './schemas/role';
 export * from './schemas/product';
 export * from './schemas/order';
 export * from './schemas/customer';

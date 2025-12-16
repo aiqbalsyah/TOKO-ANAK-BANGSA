@@ -1,12 +1,6 @@
 import { z } from 'zod';
 
 /**
- * User Role (within a tenant)
- */
-export const UserRoleSchema = z.enum(['owner', 'admin', 'cashier', 'viewer']);
-export type UserRole = z.infer<typeof UserRoleSchema>;
-
-/**
  * User Status
  */
 export const UserStatusSchema = z.enum(['active', 'inactive', 'suspended']);
@@ -49,16 +43,22 @@ export const UserPermissionsSchema = z.object({
 export type UserPermissions = z.infer<typeof UserPermissionsSchema>;
 
 /**
- * Tenant Member (User's role and permissions within a specific tenant)
+ * Tenant Member (User's role assignment within a specific tenant)
+ * Roles are now dynamic - roleId references either system_roles or tenant_roles collection
  */
 export const TenantMemberSchema = z.object({
   tenantId: z.string().uuid(),
   userId: z.string(),
-  role: UserRoleSchema,
-  permissions: UserPermissionsSchema,
+  roleId: z.string(), // References system_roles/{roleId} or tenant_roles/{roleId}
+
+  // Optional permission overrides for this specific user
+  customPermissions: UserPermissionsSchema.partial().optional(),
+
+  // Metadata
   joinedAt: z.date(),
-  invitedBy: z.string().optional(),
+  assignedBy: z.string().optional(),
   status: UserStatusSchema.default('active'),
+  expiresAt: z.date().optional(), // Optional role expiration
 });
 export type TenantMember = z.infer<typeof TenantMemberSchema>;
 
@@ -116,8 +116,9 @@ export type UpdateUserProfileInput = z.infer<typeof UpdateUserProfileInputSchema
  */
 export const InviteUserInputSchema = z.object({
   email: z.string().email(),
-  role: UserRoleSchema,
-  permissions: UserPermissionsSchema.partial(),
+  roleId: z.string(), // Reference to role ID (system or custom role)
+  customPermissions: UserPermissionsSchema.partial().optional(),
+  expiresAt: z.date().optional(),
 });
 export type InviteUserInput = z.infer<typeof InviteUserInputSchema>;
 
@@ -125,67 +126,9 @@ export type InviteUserInput = z.infer<typeof InviteUserInputSchema>;
  * Update Tenant Member Input
  */
 export const UpdateTenantMemberInputSchema = z.object({
-  role: UserRoleSchema.optional(),
-  permissions: UserPermissionsSchema.partial().optional(),
+  roleId: z.string().optional(),
+  customPermissions: UserPermissionsSchema.partial().optional(),
   status: UserStatusSchema.optional(),
+  expiresAt: z.date().optional(),
 });
 export type UpdateTenantMemberInput = z.infer<typeof UpdateTenantMemberInputSchema>;
-
-/**
- * Helper function to get default permissions by role
- */
-export function getDefaultPermissionsByRole(role: UserRole): UserPermissions {
-  const basePermissions: UserPermissions = {
-    canCreateProducts: false,
-    canEditProducts: false,
-    canDeleteProducts: false,
-    canViewProducts: true,
-    canCreateOrders: false,
-    canEditOrders: false,
-    canDeleteOrders: false,
-    canViewOrders: true,
-    canRefundOrders: false,
-    canManageCustomers: false,
-    canViewCustomers: true,
-    canManageInventory: false,
-    canViewInventory: true,
-    canViewReports: false,
-    canExportReports: false,
-    canManageSettings: false,
-    canManageUsers: false,
-    canManagePayments: false,
-  };
-
-  switch (role) {
-    case 'owner':
-      return Object.fromEntries(Object.keys(basePermissions).map((key) => [key, true])) as UserPermissions;
-    case 'admin':
-      return {
-        ...basePermissions,
-        canCreateProducts: true,
-        canEditProducts: true,
-        canDeleteProducts: true,
-        canCreateOrders: true,
-        canEditOrders: true,
-        canDeleteOrders: true,
-        canRefundOrders: true,
-        canManageCustomers: true,
-        canManageInventory: true,
-        canViewReports: true,
-        canExportReports: true,
-        canManageUsers: true,
-      };
-    case 'cashier':
-      return {
-        ...basePermissions,
-        canCreateOrders: true,
-        canEditOrders: true,
-        canViewReports: true,
-        canManageCustomers: true,
-      };
-    case 'viewer':
-      return basePermissions;
-    default:
-      return basePermissions;
-  }
-}
